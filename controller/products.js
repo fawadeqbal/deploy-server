@@ -4,7 +4,7 @@ import productsModel from "../model/products.js";
 const getProducts = async (req, res) => {
   try {
     const products = await productsModel.find().exec();
-    
+    console.log("get req")
     res.status(200).json(products);
   } catch (error) {
     console.error(error);
@@ -18,7 +18,7 @@ const getProductById = async (req, res) => {
     const productId = req.params.id;
     const product = await productsModel.findById(productId);
     
-
+    console.log("Get product by ID successful");
     if (!product) {
       return res.status(404).json({ error: "Product not found" });
     }
