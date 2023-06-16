@@ -4,11 +4,8 @@ import productsModel from "../model/products.js";
 const getProducts = async (req, res) => {
   try {
     const products = await productsModel.find().exec();
-    const items = products.map((product) => ({
-      ...product._doc,
-      image: "http://localhost:8000/" + product.image,
-    }));
-    res.status(200).json(items);
+    
+    res.status(200).json(products);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to fetch products" });
@@ -20,16 +17,13 @@ const getProductById = async (req, res) => {
   try {
     const productId = req.params.id;
     const product = await productsModel.findById(productId);
-    const item = {
-      ...product._doc,
-      image: "http://localhost:8000/" + product.image,
-    };
+    
 
     if (!product) {
       return res.status(404).json({ error: "Product not found" });
     }
 
-    res.status(200).json(item);
+    res.status(200).json(product);
     console.log("Get product by ID successful");
   } catch (error) {
     console.error(error);
