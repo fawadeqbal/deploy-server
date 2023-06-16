@@ -1,0 +1,10 @@
+
+app = "hellofly"
+primary_region = "ord"
+
+[build]
+  image = "flyio/hellofly:latest"
+
+[http_service]
+  internal_port = 8080
+  ...
