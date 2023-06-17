@@ -8,6 +8,7 @@ const getProducts = async (req, res) => {
       ...product._doc,
       image: "http://localhost:8000/" + product.image,
     }));
+    console.log("get all products")
     res.status(200).json(items);
   } catch (error) {
     console.error(error);
@@ -40,10 +41,9 @@ const getProductById = async (req, res) => {
 // Post a new product
 const postProduct = async (req, res) => {
   try {
-    const { id, title, price, description, category, rating, image } = req.body;
+    const { title, price, description, category, rating } = req.body;
 
     const newProduct = new productsModel({
-      id,
       title,
       price,
       description,
@@ -56,12 +56,21 @@ const postProduct = async (req, res) => {
     console.log("Product created successfully");
     console.log("Saved product:", savedProduct);
 
-    //res.status(201).json(savedProduct);
+    res.status(201).json(savedProduct);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to create product" });
   }
 };
-
-
-export { getProducts, getProductById, postProduct };
+const getProductsByCategory = async(req,res)=>{
+  try {
+    const products = await productsModel.find().exec();
+    const items = products.filter((product) => (product.category===req.body.category));
+    console.log("get catagory")
+    res.status(200).json(items);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to fetch products" });
+  }
+}
+export { getProducts, getProductById, postProduct,getProductsByCategory };
