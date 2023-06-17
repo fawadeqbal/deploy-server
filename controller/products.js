@@ -6,7 +6,7 @@ const getProducts = async (req, res) => {
     const products = await productsModel.find().exec();
     const items = products.map((product) => ({
       ...product._doc,
-      image: "http://localhost:8000/" + product.image,
+      image: "https://summerkings.onrender.com/" + product.image,
     }));
     console.log("get all products")
     res.status(200).json(items);
