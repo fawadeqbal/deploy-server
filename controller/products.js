@@ -23,7 +23,7 @@ const getProductById = async (req, res) => {
     const product = await productsModel.findById(productId);
     const item = {
       ...product._doc,
-      image: "http://localhost:8000/" + product.image,
+      image: "https://summerkings.onrender.com/" + product.image,
     };
 
     if (!product) {
