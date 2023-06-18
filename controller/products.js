@@ -21,16 +21,13 @@ const getProductById = async (req, res) => {
   try {
     const productId = req.params.id;
     const product = await productsModel.findById(productId);
-    const item = {
-      ...product._doc,
-      image: "https://summerkings.onrender.com/" + product.image,
-    };
-    console.log(item)
+    
+    console.log(product)
     if (!product) {
       return res.status(404).json({ error: "Product not found" });
     }
 
-    res.status(200).json(item);
+    res.status(200).json(product);
     console.log("Get product by ID successful");
   } catch (error) {
     console.error(error);
@@ -65,10 +62,10 @@ const postProduct = async (req, res) => {
 const getProductsByCategory = async(req,res)=>{
   try {
     const products = await productsModel.find().exec();
-    const items = {
-      ...products._doc,
-      image: "https://summerkings.onrender.com/" + products.image,
-    };
+    const items = products.map((product) => ({
+      ...product._doc,
+      image: "https://summerkings.onrender.com/" + product.image,
+    }));
     const item = items.filter((product) => (product.category===req.body.category));
     console.log("get catagory")
     res.status(200).json(item);
