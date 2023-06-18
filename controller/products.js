@@ -69,7 +69,7 @@ const getProductsByCategory = async(req,res)=>{
       ...products._doc,
       image: "https://summerkings.onrender.com/" + products.image,
     };
-    const item = items.map((product) => (product.category===req.body.category));
+    const item = items.filter((product) => (product.category===req.body.category));
     console.log("get catagory")
     res.status(200).json(item);
   } catch (error) {
