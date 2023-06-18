@@ -65,11 +65,8 @@ const postProduct = async (req, res) => {
 const getProductsByCategory = async(req,res)=>{
   try {
     const products = await productsModel.find().exec();
-    const items = products.filter((product) => (product.category===req.body.category));
-    const item = {
-      ...item._doc,
-      image: "https://summerkings.onrender.com/" + product.image,
-    };
+    const items = products.mapt((product) => (product.category===req.body.category));
+    const item = items.filter((product)=> ({...product, image: "https://summerkings.onrender.com/" + product.image}))
     console.log("get catagory")
     res.status(200).json(item);
   } catch (error) {
