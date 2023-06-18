@@ -25,7 +25,7 @@ const getProductById = async (req, res) => {
       ...product._doc,
       image: "https://summerkings.onrender.com/" + product.image,
     };
-
+    console.log(item)
     if (!product) {
       return res.status(404).json({ error: "Product not found" });
     }
@@ -66,8 +66,12 @@ const getProductsByCategory = async(req,res)=>{
   try {
     const products = await productsModel.find().exec();
     const items = products.filter((product) => (product.category===req.body.category));
+    const item = {
+      ...item._doc,
+      image: "https://summerkings.onrender.com/" + product.image,
+    };
     console.log("get catagory")
-    res.status(200).json(items);
+    res.status(200).json(item);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to fetch products" });
