@@ -2,7 +2,7 @@ import express from "express";
 import product from "./routes/products.js";
 import { connection } from "./db/connection.js";
 import cors from "cors";
-import registration from "./routes/registration.js";
+import registration from "./routes/user.js";
 import bodyParser from "body-parser";
 
 const app = express();
@@ -23,7 +23,7 @@ connection
   });
 
 app.use("/products", product);
-app.use("/register", registration);
+app.use("/user", registration);
 app.get('/',(req,res)=>{
   res.json({message:"Welcome to server"})
 })

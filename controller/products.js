@@ -1,12 +1,12 @@
 import productsModel from "../model/products.js";
-
+const URL="http://localhost:8000/"
 // Get all products
 const getProducts = async (req, res) => {
   try {
     const products = await productsModel.find().exec();
     const items = products.map((product) => ({
       ...product._doc,
-      image: "https://summerkings.onrender.com/" + product.image,
+      image: URL + product.image,
     }));
     console.log("get all products")
     res.status(200).json(items);
@@ -64,7 +64,7 @@ const getProductsByCategory = async(req,res)=>{
     const products = await productsModel.find().exec();
     const items = products.map((product) => ({
       ...product._doc,
-      image: "https://summerkings.onrender.com/" + product.image,
+      image: URL+ product.image,
     }));
     const item = items.filter((product) => (product.category===req.body.category));
     console.log("get catagory")
