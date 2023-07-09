@@ -60,3 +60,20 @@ export const login = async (req, res) => {
     console.log(e);
   }
 };
+
+export const updateUser = async (req, res) => {
+  try {
+    const updatedUser = req.body;
+    const userId = req.params.id;
+
+    const user = await User.findByIdAndUpdate(userId, updatedUser, {
+      new: true, // To return the updated user after the update operation
+      runValidators: true, // To run the validation defined in the User model
+    });
+
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while updating the user.' });
+  }
+};

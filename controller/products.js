@@ -1,5 +1,5 @@
 import productsModel from "../model/products.js";
-const URL="https://summerkings.onrender.com/"
+const URL="http://localhost:8000/"
 // Get all products
 const getProducts = async (req, res) => {
   try {
