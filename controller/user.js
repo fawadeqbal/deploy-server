@@ -2,10 +2,11 @@ import User from '../model/user.js'
 export const registration =async (req, res) => {
     try {
       // Extract username, email, and password from the request body
-      const { username, email, password} = req.body;
+      const { username, email, password,role} = req.body;
+      console.log(req.body)
       
       // Create a new user instance
-      const newUser = new User({ username, email, password,role:'client'});
+      const newUser = new User({ username, email, password,role});
   
       // Save the user to the database
       const savedUser = await newUser.save();
