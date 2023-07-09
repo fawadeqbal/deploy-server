@@ -74,4 +74,24 @@ const getProductsByCategory = async(req,res)=>{
     res.status(500).json({ error: "Failed to fetch products" });
   }
 }
-export { getProducts, getProductById, postProduct,getProductsByCategory };
+
+
+const deleteProduct = async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const product = await productsModel.findByIdAndDelete(productId);
+    
+    console.log(product)
+    if (!product) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    res.status(200).json(product);
+    console.log("Get product by ID successful");
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to fetch product" });
+  }
+};
+
+export { getProducts, getProductById, postProduct,getProductsByCategory,deleteProduct };
